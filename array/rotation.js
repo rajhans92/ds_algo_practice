@@ -26,10 +26,38 @@ let d = 6;
 console.log("setOfData = ",setOfData);
 console.log("n = ",n);
 console.log("d = ",d);
-for(let i=0; i<d; i++){
-	let tempVal = setOfData[i];
-	setOfData[i] = setOfData[n-d+i];
-	setOfData[n-d+i] = tempVal;
+// get the gratest common division
+function getGcd(a,b){
+	if(b==0)
+		return a;
+	else
+		return getGcd(b,a%b);
 }
 
-console.log("Result = ",setOfData);
+function leftRotate(arr, d, n){
+	d = d%n;
+	let gcd = getGcd(d,n);
+	for(let i =0; i<gcd ;i++){
+		let temp = arr[i];
+		let j = i;
+ 
+        while (1) {
+            let k = j + d;
+            if (k >= n)
+                k = k - n;
+ 
+            if (k == i)
+                break;
+ 
+            arr[j] = arr[k];
+            j = k;
+        }
+        arr[j] = temp;
+	}
+}
+
+function printArray(arr){
+    console.log(arr);
+}
+leftRotate(setOfData, d, n)
+printArray(setOfData)
